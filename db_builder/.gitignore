@@ -1,0 +1,5 @@
+*.sqlite
+failures.txt
+node_modules
+.vscode
+champion.json

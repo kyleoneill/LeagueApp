@@ -1,0 +1,5 @@
+[global]
+address = "127.0.0.1"
+
+[global.databases]
+sqlite_champions = { url = "champions.sqlite" }
