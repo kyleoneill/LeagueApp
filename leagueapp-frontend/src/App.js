@@ -31,8 +31,10 @@ class App extends React.Component {
     }
   }
 
-  async handleNameChange(newName, index) {
+  async handleNameChange(newName) {
     let serverChampNames = require("./assets/clean_champ_names.json");
+    let humanReadableNames = require("./assets/human_readable_names.json");
+    let index = humanReadableNames.indexOf(newName);
     let res = await getChampionBuild(serverChampNames[index]);
     if(res.status === 200) {
       let build = parseBuild(res.data);

@@ -13,4 +13,4 @@ rocket = "0.4.6"
 [dependencies.rocket_contrib]
 version = "0.4.6"
 default-features = false
-features = ["sqlite_pool"]
+features = ["sqlite_pool", "serve"]

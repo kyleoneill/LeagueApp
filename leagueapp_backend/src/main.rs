@@ -4,6 +4,7 @@
 #[macro_use] extern crate rocket_contrib;
 
 use rocket_contrib::databases::rusqlite;
+use rocket_contrib::serve::StaticFiles;
 
 #[database("sqlite_champions")]
 struct ChampDbConn(rusqlite::Connection);
@@ -17,12 +18,7 @@ use rocket::{
 mod model;
 use model::query_build;
 
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
-
-#[get("/api/champion/<name>")]
+#[get("/champion/<name>")]
 fn champion(conn: ChampDbConn, name: &RawStr) -> Result<content::Json<String>, NotFound<String>> {
     Ok(
         query_build(&conn.0, name.as_str())
@@ -34,6 +30,7 @@ fn champion(conn: ChampDbConn, name: &RawStr) -> Result<content::Json<String>, N
 fn main() {
     rocket::ignite()
         .attach(ChampDbConn::fairing())
-        .mount("/", routes![index, champion])
+        .mount("/api", routes![champion])
+        .mount("/", StaticFiles::from(concat!(env!("CARGO_MANIFEST_DIR"), "/static")))
         .launch();
 }

@@ -59,7 +59,7 @@ export default function SideDrawer(props) {
                     {championList !== undefined && championList.length > 0 &&
                         <>
                             {championList.slice(0, 20).map((text, index) => (
-                                <ListItem button key={text} onClick={() => props.nameChange(text, index)}>
+                                <ListItem button key={text} onClick={() => props.nameChange(text)}>
                                     <ListItemText primary={text} />
                                 </ListItem>
                             ))}
@@ -68,7 +68,7 @@ export default function SideDrawer(props) {
                     {(championList === undefined || championList.length === championNames.length) &&
                         <>
                             {championNames.map((text, index) => (
-                                <ListItem button key={text} onClick={() => props.nameChange(text, index)}>
+                                <ListItem button key={text} onClick={() => props.nameChange(text)}>
                                     <ListItemText primary={text} />
                                 </ListItem>
                             ))}
