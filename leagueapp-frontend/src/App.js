@@ -2,24 +2,23 @@ import './App.css';
 import React from "react";
 
 import HeaderBar from "./components/app-bar";
-
 import Build from "./pages/build";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-  app: {
-    display: 'flex',
-  }
-}));
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 function App() {
-  const classes = useStyles();
   return (
-    <div className="App">
+    <ThemeProvider theme={darkTheme}>
       <HeaderBar appName="League App" />
       <Build />
-    </div>
+    </ThemeProvider>
   );
 }
 

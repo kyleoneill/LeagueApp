@@ -8,6 +8,8 @@ import {
 const useStyles = makeStyles((theme) => ({
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary
     }
 }));
 export default function HeaderBar(props) {

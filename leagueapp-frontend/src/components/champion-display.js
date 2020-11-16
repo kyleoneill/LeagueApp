@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
         '& div' : {
             margin: "0 50px 0px 0px"
-        }
+        },
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary
     },
     columnContainer: {
         display: "flex",
