@@ -8,6 +8,24 @@ pub struct Counter {
     weak_against: String
 }
 
+impl Counter {
+    pub fn convert_to_json(&self) -> content::Json<String> {
+        content::Json(
+            format!("
+            {{ 
+                \"champion\": \"{0}\",\n
+                \"strong_against\": \"{1}\",\n
+                \"weak_against\": \"{2}\"
+            }}
+            ",
+                self.champion,
+                self.strong_against,
+                self.weak_against
+            )
+        )
+    }
+}
+
 #[derive(Debug)]
 pub struct Build {
     champion: String,
@@ -48,21 +66,7 @@ impl ChampionBuild {
     }
 }
 
-pub fn query_build(conn: &Connection, champ_name: &str) -> Result<ChampionBuild> {
-    let mut counter_stmt = conn.prepare("SELECT * FROM counters WHERE champion = :champion")?;
-    let mut counter_rows = counter_stmt.query_named(&[(":champion", &champ_name)])?;
-    let counters: Counter;
-    if let Some(Ok(counter_row)) = counter_rows.next() {
-        counters = Counter {
-            champion: counter_row.get(0),
-            strong_against: counter_row.get(1),
-            weak_against: counter_row.get(2)
-        };
-    }
-    else {
-        return Err(rusqlite::Error::QueryReturnedNoRows);
-    }
-
+pub fn query_build(conn: &Connection, champ_name: &str) -> Result<Build> {
     let mut build_stmt = conn.prepare("SELECT * FROM builds WHERE champion = :champion")?;
     let mut build_rows = build_stmt.query_named(&[(":champion", &champ_name)])?;
     let build: Build;
@@ -79,10 +83,32 @@ pub fn query_build(conn: &Connection, champ_name: &str) -> Result<ChampionBuild>
         return Err(rusqlite::Error::QueryReturnedNoRows);
     }
 
-    let champ_build = ChampionBuild {
+    Ok(build)
+}
+
+pub fn query_counter(conn: &Connection, champ_name: &str) -> Result<Counter> {
+    let mut counter_stmt = conn.prepare("SELECT * FROM counters WHERE champion = :champion")?;
+    let mut counter_rows = counter_stmt.query_named(&[(":champion", &champ_name)])?;
+    let counters: Counter;
+    if let Some(Ok(counter_row)) = counter_rows.next() {
+        counters = Counter {
+            champion: counter_row.get(0),
+            strong_against: counter_row.get(1),
+            weak_against: counter_row.get(2)
+        };
+    }
+    else {
+        return Err(rusqlite::Error::QueryReturnedNoRows);
+    }
+    Ok(counters)
+}
+
+pub fn get_champion_build(conn: &Connection, champ_name: &str) -> Result<ChampionBuild> {
+    let counters = query_counter(conn, champ_name)?;
+    let build = query_build(conn, champ_name)?;
+    let champ_build = ChampionBuild{
         counters,
         build
     };
-
     Ok(champ_build)
 }
