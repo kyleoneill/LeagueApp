@@ -2,18 +2,22 @@
 
 A webapp that displays build and counter information for each champion in League of Legends.
 
-The frontend is React (Node.Js) and the backend is Rocket (Rust). The repository includes a web scraper to build a database for the backend but it currently needs manual correction after running.
+The frontend is React (Node.Js) and the backend is Rocket (Rust). The database is built using [this repository](https://github.com/kyleoneill/leaguebuilder).
+
+<br />
 
 ## Running
 
-- Build the frontend
+### Build the frontend
 ```sh
 $ npm run build
 ```
 
 - Move everything from the build folder into a folder in the backend root named `static`
 
-- Build the backend 
+<br />
+
+### Build the backend 
 ```sh
 $ cargo build --release
 ```
