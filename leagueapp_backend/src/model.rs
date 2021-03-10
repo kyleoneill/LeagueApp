@@ -9,7 +9,9 @@ pub struct Champion {
     name: String,
     win_rate: f64,
     pick_rate: f64,
-    ban_rate: f64
+    ban_rate: f64,
+    human_readable_name: String,
+    title: String
 }
 
 impl Champion {
@@ -23,6 +25,8 @@ impl Champion {
                 win_rate: row.get(2),
                 pick_rate: row.get(3),
                 ban_rate: row.get(4),
+                human_readable_name: row.get(5),
+                title: row.get(6)
             };
         }
         else {
