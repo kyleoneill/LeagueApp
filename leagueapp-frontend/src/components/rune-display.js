@@ -24,8 +24,9 @@ function cleanRuneName(name) {
 function RuneSection(props) {
     const classes = useStyles();
     let sections;
+    let arr = props.runes.split('&');
     try {
-        sections = props.runes.map((text, index) => (
+        sections = arr.map((text, index) => (
             <div key={text + "-head-" + index}>
                 <li key={text + "-" + index}>{text}</li>
                 <img 
@@ -54,19 +55,19 @@ export default function RuneDisplay(props) {
             <div className="build-primary-runes">
                 <h3>Primary Runes</h3>
                 <ol>
-                    <RuneSection runes={props.build.runePrimary} />
+                    <RuneSection runes={props.runes.rune_primary} />
                 </ol>
             </div>
             <div className="build-secondary-runes">
                 <h3>Secondary Runes</h3>
                 <ol>
-                    <RuneSection runes={props.build.runeSecondary} />
+                    <RuneSection runes={props.runes.rune_secondary} />
                 </ol>
             </div>
             <div className="build-tertiary-runes">
                 <h3>Tertiary Runes</h3>
                 <ol>
-                    <RuneSection runes={props.build.runeTertiary} />
+                    <RuneSection runes={props.runes.rune_tertiary} />
                 </ol>
             </div>
         </div>

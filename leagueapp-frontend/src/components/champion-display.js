@@ -2,7 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     Toolbar,
 } from "@material-ui/core";
+import StatDisplay from "./stats-display";
 import RuneDisplay from "./rune-display";
+import ItemDisplay from "./item-display";
+import CounterDisplay from "./counter-display";
+import { capitalizeFirstLetter } from "../util";
 const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
@@ -26,38 +30,21 @@ export default function ChampionDisplay(props) {
             <Toolbar />
             {props.champName !== "" &&
                 <>
-                    <h1>{props.champName}</h1>
+                    <h1>{props.build.champ_stats.human_readable_name}</h1>
+                    <h2>{capitalizeFirstLetter(props.build.champ_stats.title)}</h2>
                     <div className={classes.columnContainer}>
-                        <div className="build-items">
-                            <h3>Items</h3>
-                            <ol>
-                                {props.build.items.map((text, index) => (
-                                    <li key={text + "-" + index}>{text}</li>
-                                ))}
-                            </ol>
-                        </div>
-                        <RuneDisplay
-                            build={props.build}
+                        <StatDisplay
+                            stats={props.build.champ_stats}
                         />
-                        <div className="champion-counters">
-                            <h2>Counters</h2>
-                            <div className="counter-strong">
-                                <h3>Strong Against</h3>
-                                <ol>
-                                    {props.build.strongAgainst.map((text, index) => (
-                                        <li key={text + "-" + index}>{text}</li>
-                                    ))}
-                                </ol>
-                            </div>
-                            <div className="counter-weak">
-                                <h3>Weak Against</h3>
-                                <ol>
-                                    {props.build.weakAgainst.map((text, index) => (
-                                        <li key={text + "-" + index}>{text}</li>
-                                    ))}
-                                </ol>
-                            </div>
-                        </div>
+                        <ItemDisplay
+                            items={props.build.items}
+                        />
+                        <RuneDisplay
+                            runes={props.build.runes}
+                        />
+                        <CounterDisplay //make
+                            counters={props.build.counters}
+                        />
                     </div>
                 </>
             }
