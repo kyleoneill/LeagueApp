@@ -44,6 +44,7 @@ export default function ChampionDisplay(props) {
                         />
                         <CounterDisplay //make
                             counters={props.build.counters}
+                            name={props.build.champ_stats.human_readable_name}
                         />
                     </div>
                 </>
