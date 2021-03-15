@@ -42,7 +42,7 @@ export default function ChampionDisplay(props) {
                         <RuneDisplay
                             runes={props.build.runes}
                         />
-                        <CounterDisplay //make
+                        <CounterDisplay
                             counters={props.build.counters}
                             name={props.build.champ_stats.human_readable_name}
                         />

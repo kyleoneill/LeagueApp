@@ -12,11 +12,11 @@ function RenderItems(props) {
     return(
         <div className="item-section">
             <h3>{props.name}</h3>
-            <ol>
+            <ul>
                 {arr.map((text, index) => (
                     <li key={text + "-" + index}>{text}</li>
                 ))}
-            </ol>
+            </ul>
         </div>
     )
 }

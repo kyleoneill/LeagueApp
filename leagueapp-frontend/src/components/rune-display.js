@@ -3,6 +3,17 @@ const useStyles = makeStyles((theme) => ({
     runeImage: {
         height: "50px",
         width: "50px"
+    },
+    majorRunes: {
+        position: "relative",
+        height: "440px",
+        '& .major-rune': {
+            display: "inline-block",
+            position: "absolute"
+        },
+        '& .secondary': {
+            left: "175px"
+        }
     }
 }));
 
@@ -52,17 +63,19 @@ export default function RuneDisplay(props) {
     const classes = useStyles();
     return(
         <div className="build-runes">
-            <div className="build-primary-runes">
-                <h3>Primary Runes</h3>
-                <ol>
-                    <RuneSection runes={props.runes.rune_primary} />
-                </ol>
-            </div>
-            <div className="build-secondary-runes">
-                <h3>Secondary Runes</h3>
-                <ol>
-                    <RuneSection runes={props.runes.rune_secondary} />
-                </ol>
+            <div className={classes.majorRunes}>
+                <div className="major-rune primary">
+                    <h3>Primary Runes</h3>
+                    <ol>
+                        <RuneSection runes={props.runes.rune_primary} />
+                    </ol>
+                </div>
+                <div className="major-rune secondary">
+                    <h3>Secondary Runes</h3>
+                    <ol>
+                        <RuneSection runes={props.runes.rune_secondary} />
+                    </ol>
+                </div>
             </div>
             <div className="build-tertiary-runes">
                 <h3>Tertiary Runes</h3>
