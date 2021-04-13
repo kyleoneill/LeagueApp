@@ -16,7 +16,7 @@ function CounterSection(props) {
     return(
         <ul>
             {arr.map((text, index) => (
-                <li key={props.type + index}>{text.substring(0, text.length - 2)} - Winrate: {text.substring(text.length - 2, text.length)}%</li>
+                <li key={props.type + index}>{text.substring(0, text.length - 2)} - {text.substring(text.length - 2, text.length)}%</li>
             ))}
         </ul>
     )
@@ -28,6 +28,7 @@ export default function CounterDisplay(props) {
     return(
         <div className="build-counters">
             <h2>Counters</h2>
+            <p>The percentages below are the win rates against {props.name} for the listed champion</p>
             <div className="counter-section counter-strong">
                 <h3>Strong Against</h3>
                 <p>{props.name} counters these champions</p>

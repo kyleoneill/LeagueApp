@@ -32,6 +32,7 @@ export default function ChampionDisplay(props) {
                 <>
                     <h1>{props.build.champ_stats.human_readable_name}</h1>
                     <h2>{capitalizeFirstLetter(props.build.champ_stats.title)}</h2>
+                    <br />
                     <div className={classes.columnContainer}>
                         <StatDisplay
                             stats={props.build.champ_stats}

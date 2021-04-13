@@ -1,22 +1,22 @@
 import React from "react";
 
+import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles'
+
 import "../style/build-page.css";
 
-class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
+const useStyles = makeStyles((theme) => ({
+    homePage: {
+        margin: "40px"
     }
+}));
 
-    render() {
-        return (
-          <div className="home-page">
-              <p>Home page</p>
-          </div>
-        );
-    }
+export default function Home(props) {
+    const classes = useStyles();
+    return (
+        <div className={classes.homePage}>
+            <p>Select "Builds" or "Counters" on the navigation bar above.</p>
+        </div>
+    );
 }
-
-export default Home;
