@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    position: "relative"
   },
   drawerContainer: {
     overflow: 'auto',
