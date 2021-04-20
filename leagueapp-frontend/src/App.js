@@ -11,11 +11,12 @@ import { ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import {Navbar, Nav} from "react-bootstrap";
+import {LinkContainer} from 'react-router-bootstrap'
 
 import {
   Switch,
   Route,
-  BrowserRouter as Router
+  HashRouter
 } from "react-router-dom";
 
 const darkTheme = createMuiTheme({
@@ -38,14 +39,22 @@ function App() {
   const classes = useStyles();
   return (
     <ThemeProvider theme={darkTheme}>
-      <Router>
+      <HashRouter>
         <div className={classes.backgroundContainer}>
           <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/">League App</Navbar.Brand>
+            <LinkContainer to="/">
+              <Navbar.Brand>League App</Navbar.Brand>
+            </LinkContainer>
             <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/builds">Builds</Nav.Link>
-              <Nav.Link href="/counters">Counters</Nav.Link>
+              <LinkContainer to="/">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/builds">
+                <Nav.Link>Builds</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/counters">
+                <Nav.Link>Counters</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar>
           <Switch>
@@ -54,7 +63,7 @@ function App() {
             <Route path="/counters" component={Counter} />
           </Switch>
         </div>
-      </Router>
+      </HashRouter>
     </ThemeProvider>
   );
 }
